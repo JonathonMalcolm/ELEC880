@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 G_directory = 'Data/'
 G_threshold = 0.5 # in percent
 
+
 j = 0
 for filename in os.listdir(G_directory):
     plot_data = []
@@ -25,7 +26,7 @@ for filename in os.listdir(G_directory):
         new_data['Adj Close'] = data['Adj Close'].diff()
         new_data['Volume'] = data['Volume']
 
-        for thresh in np.arange(0.2, 4, 0.2):
+        for thresh in [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.5, 2, 3, 4]:
             final_data = pd.DataFrame()
 
             row_data = []
@@ -42,7 +43,7 @@ for filename in os.listdir(G_directory):
 
             percent_lost = count / len(row_data)
 
-            plot_data.append([thresh, percent_lost])
+            plot_data.append([thresh, percent_lost*100])
 
         df = pd.DataFrame(plot_data, columns=['K', 'Percent'])
 
@@ -51,7 +52,7 @@ for filename in os.listdir(G_directory):
         continue
     else:
         continue
-plt.xlabel('K Value')
-plt.ylabel('Fraction Lost')
-plt.legend(loc='best')
+plt.xlabel('Threshold Value K (%)')
+plt.ylabel('Data Lost (%)')
+#plt.legend(loc='best')
 plt.show()
