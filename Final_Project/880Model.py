@@ -160,7 +160,7 @@ model = Sequential()
 # model.add(Dense(1, activation='sigmoid'))
 
 # RNN Model
-model.add(SimpleRNN(32, activation='relu', batch_input_shape=batch_size, stateful=1))
+model.add(SimpleRNN(32, activation='relu', input_shape=(inpLen, inpDim)))
 model.add(Dense(1, activation='sigmoid'))
 
 # # LSTM Model - Doesnt work
